@@ -1,0 +1,133 @@
+<body ng-controller="mycontroller">
+	
+		
+       <!-- <div class="container-fluid">-->
+<div class="container">
+
+		<div class="panel panel-default">
+                    <div class="panel-heading">
+                                <header class="panel-title">Leave Application<header/>
+                    </div>
+                
+                     <legend class = "panel-body-title">Apply For Leave</legend>
+
+			
+<div class="panel-body">
+	<div class = "row">
+	
+		<div class="col-xs-12 col-sm-6 col-md-8">
+                         	<form name="userForm"  class="form-horizontal" novalidate>
+                    <div class="row">
+                        
+		                 <div class="col-xs-12 col-sm-6 col-md-4" id = "fromdate" ng-class="{ 'has-error' : userForm.fromDate.$invalid && !userForm.fromDate.$pristine }">   
+		                    <label>From:</label>
+		                    <input class = "form-control" name="dateInput" type="date" id = "fromDate" name = "fromDate" ng-model="info.fromDate" required/>
+		                 <p ng-show="userForm.fromDate.$invalid && !userForm.fromDate.$pristine" class="help-block" placeholder = "yyyy-mm--dd" id ="fromDateError">FromDate is required.</p>
+		                     <!--<p id = "fromDateError" class="help-block"></p>-->
+		                </div> 
+                    
+
+		                <div class="col-xs-12 col-sm-6 col-md-4" ng-class="{ 'has-error' : userForm.toDate.$invalid && !userForm.toDate.$pristine }">   
+		                    <label>To:</label>
+		                    <input class = "form-control" name = "dareInput1" type="date" id = "toDate" name = "toDate" ng-model="info.toDate" required /> 
+		                    <p ng-show="userForm.toDate.$invalid && !userForm.toDate.$pristine" class="help-block" id ="toDateError">ToDate is required.</p>
+		                    <!-- <p id = "toDateError" class="help-block"></p>-->
+		                </div>
+                        
+                    </div>
+                     <br/><br/>
+
+			<div class="row">
+                    
+		                <div class="col-xs-12 col-sm-6 col-md-5" ng-class="{ 'has-error' : userForm.reasonForLeave.$invalid && !userForm.reasonForLeave.$pristine }">   
+		                    <label>Reason For Leave:</label>
+		                    <textarea class = "form-control" placeholder="Enter the text here" id="reasonForLeave" name = "reasonForLeave" ng-model="info.reasonForLeaveRequest" required></textarea> 
+		                    <p ng-show="userForm.reasonForLeave.$invalid && !userForm.reasonForLeave.$pristine" class="help-block" id = "reasonForLeaveError">Please Enter the reason for leave</p>  
+		                   <!-- <p id = "reasonForLeaveError" class="help-block"></p>-->
+		                </div>
+			</div>
+                    		<br/><br/>
+
+			<div class="row">
+		                <div class="col-xs-12 col-sm-6 col-md-5" id = "" ng-class="{ 'has-error' : userForm.approverMailId.$invalid && !userForm.approverMailId.$pristine }">
+		                    <label>Approver EmailId:</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">@</div>
+                                <input class = "form-control" type="email" id = "approverMailId" name = "approverMailId" placeholder="Enter Approver MailId" ng-model = "info.approverEmailId" ng-pattern="/^[A-Za-z0-9._%+-]+@atmecs.com$/" required /> 
+                            </div>
+                            <p ng-show="userForm.approverMailId.$invalid && !userForm.approverMailId.$pristine" class="help-block" id = "approverMailIdError">Please Enter approver MailId</p>
+		                  
+		                </div>
+			</div>
+                    		<br/><br/>
+                    
+			<div class="row">
+				<div class="col-xs-12 col-sm-6 col-md-4">
+                    <input type="hidden" ng-model="info.status"/>
+				<input type="submit" id = "submitForLeave" name="submitForLeave" value="Submit For Leave" ng-click="applyForLeave(info)" ng-disabled = "userForm.$invalid" class="btn btn-primary btn-large"/><br/><br/><br/>
+                     
+                    
+                  <!--  <table class="table table-bordered">
+                    <tr ng-repeat="name in leave">
+                        <td>{{name.fromDate}}</td>
+                        <td>{{name.toDate}}</td>
+                        <td>{{name.ReasonforApply}}</td>
+                        <td>{{name.approverEmailId}}</td>
+                    </tr>
+                </table>-->
+                    
+                    
+                    
+                    
+				<!-- <input type="submit" name="approveForLeave" value="submit" ng-click="applyForLeave(info)"/>-->
+				</div>
+			</div>
+			</form>
+		</div>
+		<div class = "col-xs-6 col-md-4">
+            
+            <div class = "row">
+            <table class="table table-condensed">
+                <tr class="">
+                    <td><button ng-click="listOfHRLeaves()" class = "btn btn-info">HR Leaves</button></td>
+                </tr>
+            </table>
+            </div>
+            
+            <div class = "row" style="display:none;" id="closeDetails">
+                <div class="pull-left">
+                    <div class = "active">
+                        <img class="img-rounded" src="public/images/close.jpeg" ng-click="hlClocse()"/>
+                    </div>
+                </div>
+                <table class="table table-bordered">
+				<tr class = "info">
+				<th>Sno</th>	
+				<th>Date</th>
+				<th>Day</th>
+				<th>Festival</th>   
+				</tr>
+                <tr ng-repeat="name in preview">
+				<td>{{name.slNo}}</td>	
+				<td>{{name.date}}</td>
+				<td>{{name.day}}</td>
+				<td>{{name.festival}}</td>			
+				</tr>    
+                </table>
+                
+                <br/><br/>
+                
+               
+            </div>
+            
+        </div>          
+        </div> <!-- row end -->
+
+    </div> <!-- Panel body end -->
+                        <br/><br/>
+            <div class="row"> <!-- cancel levae button start -->
+                <div class="col-xs-12 col-sm-6 col-md-4">   
+                <a href="#/cancelLeave" class="btn btn-primary btn-lg enabled" role="button">Cancel Leave Form</a>    
+                </div>
+            </div><!-- cancel levae button end -->
+</div> <!-- Container End -->

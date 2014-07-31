@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Angular JS</title>
+        <link type = "text/css" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css" rel="stylesheet">
+    
+            <script src="public/js/jquery-1.7.2.min.js"></script>
+            <script src ="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.js"></script>
+           
+			<script>
+                        
+                       $(document).ready(function(){
+                            $("#from").datepicker();
+                            $("#to").datepicker();
+
+
+                    $('#getBetween').on('click', function () {
+                        var start = $("#from").datepicker("getDate"),
+                            end = $("#to").datepicker("getDate"),
+                            currentDate = new Date(start),
+                            between = [],
+                            res1 = [],
+                            res2 = []
+                        ;
+                    
+                        while (currentDate <= end) {
+                            between.push(new Date(currentDate));
+                            currentDate.setDate(currentDate.getDate() + 1);
+                        }
+
+                        var res = between;
+                        var res1=[];
+                        for(var getRes = 0; getRes<res.length; getRes++) {
+                        
+                            var weekday = new Array(7);
+                            weekday[0]=  "Sunday";
+                            weekday[1] = "Monday";
+                            weekday[2] = "Tuesday";
+                            weekday[3] = "Wednesday";
+                            weekday[4] = "Thursday";
+                            weekday[5] = "Friday";
+                            weekday[6] = "Saturday";
+
+                            res1.push(weekday[res[getRes].getDay()]);
+
+                        }
+                        
+                       $('#results').html(res1.join('<br> '));
+         
+                    });
+                            }); 
+                   
+        </script>
+	</head>
+	
+<body>
+    
+    
+    <input id="from" />
+<input id="to" />
+<button id="getBetween">Get Between Dates</button>
+<div id="results"></div>
+    
+</body>
+</html>

@@ -1,0 +1,70 @@
+
+<div class="container">
+
+    <div class="panel panel-default">
+        
+        <div class="panel-heading">
+        <header class="panel-title">Leave Application<header/>
+        </div>
+
+        <legend class = "panel-body-title">Cancel For Leave</legend>
+
+
+        <div class="panel-body">
+            <form name="cancelForm"  class="form-horizontal" novalidate>
+                <div class="row">
+                    <div class = "col-xs-12 col-sm-6 col-md-12">
+                       <table class="table table-bordered" id = "getstatus">
+                        <tr>
+                            <th>Leave type</th>
+                            <th>From Date</th>
+                            <th>To Date</th>
+                            <th>Reason for leave</th>
+                            <th>Approver MailId</th>
+                            <th>Status</th>
+                        </tr>
+                        <tr ng-repeat="c in cancelData">
+                            
+                            <td><input type="radio" name="leaveType" id = "{{c._id}}"/></td>
+                            <td>{{c.fromDate}}</td>
+                            <td>{{c.toDate}}</td>
+                            <td>{{c.ReasonforApply}}</td>
+                            <td>{{c.mailId}}</td>
+                           <!-- <td class='leave_{{c._id}}' required>{{c.applyLeavestatus}}</td>-->
+                          <td class='leave_{{c._id}}' ng-model="info.cancelLeaveStatus"> {{c.applyLeavestatus}}</td>
+                        </tr>
+                    </table>  
+                    </div>
+                </div>
+                
+                 <div class="row">
+                    <div class = "col-xs-12 col-sm-6 col-md-6" ng-class="{ 'has-error' : cancelForm.reasonForCancelLeave.$invalid && !cancelForm.reasonForCancelLeave.$pristine }">
+                       <label>Reason for Cancellation:</label>
+                        <textarea class = "form-control" placeholder="Enter the text here" id="reasonForCancelLeave" name = "reasonForCancelLeave" ng-model="info.reasonforcancelLeaveRequest" required></textarea> 
+                        <p ng-show="cancelForm.reasonForCancelLeave.$invalid && !cancelForm.reasonForCancelLeave.$pristine" class="help-block" id = "cancelForLeaveError">Please Enter the cancel for leave</p>
+                    </div>
+                </div> <br/><br/>
+                     
+                 <div class="row">
+                    <div class = "col-xs-12 col-sm-6 col-md-6" ng-class="{ 'has-error' : cancelForm.approverMailId.$invalid && !cancelForm.approverMailId.$pristine }">
+                       <label>Forward To/Approver:</label> 
+                        <div class="input-group">
+                        <div class="input-group-addon">@</div>
+                        <input class = "form-control" type="email" id = "approverMailId" name = "approverMailId" placeholder="Enter Approver MailId" ng-model = "info.approverMailId" ng-pattern="/^[A-Za-z0-9._%+-]+@atmecs.com$/" required /> 
+                        </div>
+                        <p ng-show="cancelForm.approverMailId.$invalid && !cancelForm.approverMailId.$pristine" class="help-block" id = "approverMailIdError">Please Enter approver MailId</p>
+                    </div>
+                </div>    <br/><br/>
+                
+                      <div class="row">
+                    <div class = "col-xs-12 col-sm-6 col-md-12">
+                        <input type="submit" id = "cancelForLeave" name="cancelForLeave" value="Cancel For Leave" ng-click="cancelForLeave(info)" class="btn btn-primary btn-large"  ng-disabled = "cancelForm.$invalid"/> <!-- ng-disabled = "cancelForm.$invalid" -->  
+                    </div>
+                </div>
+                
+            </form>
+        </div>	
+            
+    </div>
+</div>
+    
